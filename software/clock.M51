@@ -1,0 +1,252 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/24/2020  17:25:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, main.obj, test.obj, time.obj TO clock RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  main.obj (MAIN)
+  test.obj (TEST)
+  time.obj (TIME)
+
+
+LINK MAP OF MODULE:  clock (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            REG     0008H     0008H     ABSOLUTE     "REG BANK 1"
+            DATA    0010H     000CH     UNIT         ?DT?TIME
+            IDATA   001CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0012H     UNIT         ?PR?TIMER1INIT?TIME
+            CODE    0015H     0003H     UNIT         ?PR?TESTPRO?TEST
+                    0018H     0003H                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+            CODE    001EH     0021H     UNIT         ?PR?T1INTERRPUT?TIME
+            CODE    003FH     0021H     UNIT         ?PR?SOFTTIMERPRO?TIME
+            CODE    0060H     001FH     UNIT         ?PR?TESTTIMER?TEST
+            CODE    007FH     000CH     UNIT         ?C_C51STARTUP
+            CODE    008BH     000CH     UNIT         ?PR?_SETSOFTTIMER?TIME
+            CODE    0097H     000CH     UNIT         ?PR?_GETSOFTTIMER?TIME
+            CODE    00A3H     0008H     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   clock (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER1INIT?TIME
+  +--> ?PR?TESTPRO?TEST
+
+?PR?TESTPRO?TEST
+  +--> ?PR?TESTTIMER?TEST
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/24/2020  17:25:42  PAGE 2
+
+
+?PR?TESTTIMER?TEST
+  +--> ?PR?_GETSOFTTIMER?TIME
+  +--> ?PR?_SETSOFTTIMER?TIME
+
+*** NEW ROOT ***************************************************
+
+?PR?T1INTERRPUT?TIME
+  +--> ?PR?SOFTTIMERPRO?TIME
+
+
+
+SYMBOL TABLE OF MODULE:  clock (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:007FH         SEGMENT       ?C_C51STARTUP
+  I:001CH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0082H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:007FH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:007FH         LINE#         133
+  C:0081H         LINE#         134
+  C:0082H         LINE#         135
+  C:0083H         LINE#         136
+  C:0085H         LINE#         185
+  C:0088H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:00A3H         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/24/2020  17:25:42  PAGE 3
+
+
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:00A3H         LINE#         12
+  C:00A3H         LINE#         13
+  C:00A3H         LINE#         14
+  C:00A6H         LINE#         15
+  C:00A9H         LINE#         16
+  C:00A9H         LINE#         17
+  C:00A9H         LINE#         19
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        TEST
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0060H         PUBLIC        TestTimer
+  B:00B0H.0       PUBLIC        SEG_BIT_0
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0015H         PUBLIC        TestPro
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          TESTTIMER
+  C:0060H         LINE#         12
+  C:0060H         LINE#         13
+  C:0060H         LINE#         14
+  C:0060H         LINE#         15
+  C:0060H         LINE#         16
+  C:006FH         LINE#         17
+  C:006FH         LINE#         18
+  C:0078H         LINE#         19
+  C:007DH         LINE#         20
+  -------         ENDPROC       TESTTIMER
+  -------         PROC          TESTPRO
+  C:0015H         LINE#         30
+  C:0015H         LINE#         31
+  C:0015H         LINE#         33
+  -------         ENDPROC       TESTPRO
+  -------         ENDMOD        TEST
+
+  -------         MODULE        TIME
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0010H         PUBLIC        SoftTimer
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/24/2020  17:25:42  PAGE 4
+
+
+  C:0097H         PUBLIC        _GetSoftTimer
+  B:00A8H.3       PUBLIC        ET1
+  B:0088H.7       PUBLIC        TF1
+  D:008DH         PUBLIC        TH1
+  C:008BH         PUBLIC        _SetSoftTimer
+  D:008BH         PUBLIC        TL1
+  C:003FH         PUBLIC        SoftTimerPro
+  B:0088H.6       PUBLIC        TR1
+  C:001EH         PUBLIC        T1Interrput
+  D:00C8H         PUBLIC        T2CON
+  C:0003H         PUBLIC        timer1Init
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          TIMER1INIT
+  C:0003H         LINE#         22
+  C:0003H         LINE#         23
+  C:0003H         LINE#         25
+  C:0006H         LINE#         28
+  C:0009H         LINE#         31
+  C:000CH         LINE#         34
+  C:000EH         LINE#         37
+  C:0010H         LINE#         40
+  C:0012H         LINE#         43
+  C:0014H         LINE#         44
+  -------         ENDPROC       TIMER1INIT
+  -------         PROC          T1INTERRPUT
+  C:001EH         LINE#         53
+  C:002BH         LINE#         61
+  C:002EH         LINE#         63
+  C:0031H         LINE#         66
+  C:0034H         LINE#         67
+  -------         ENDPROC       T1INTERRPUT
+  -------         PROC          SOFTTIMERPRO
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:003FH         LINE#         75
+  C:003FH         LINE#         76
+  C:003FH         LINE#         79
+  C:0041H         LINE#         80
+  C:0041H         LINE#         81
+  C:004EH         LINE#         82
+  C:004EH         LINE#         83
+  C:005BH         LINE#         84
+  C:005BH         LINE#         85
+  C:005FH         LINE#         86
+  -------         ENDPROC       SOFTTIMERPRO
+  -------         PROC          _SETSOFTTIMER
+  D:0007H         SYMBOL        index
+  D:0004H         SYMBOL        value
+  C:008BH         LINE#         94
+  C:008BH         LINE#         95
+  C:008BH         LINE#         96
+  C:0096H         LINE#         97
+  -------         ENDPROC       _SETSOFTTIMER
+  -------         PROC          _GETSOFTTIMER
+  D:0007H         SYMBOL        index
+  C:0097H         LINE#         105
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/24/2020  17:25:42  PAGE 5
+
+
+  C:0097H         LINE#         106
+  C:0097H         LINE#         107
+  C:00A2H         LINE#         108
+  -------         ENDPROC       _GETSOFTTIMER
+  -------         ENDMOD        TIME
+
+Program Size: data=29.0 xdata=0 code=168
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

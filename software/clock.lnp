@@ -1,0 +1,6 @@
+"STARTUP.obj",
+"main.obj",
+"test.obj",
+"time.obj" 
+TO "clock" 
+RAMSIZE(256) 
